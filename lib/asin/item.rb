@@ -28,7 +28,9 @@ module ASIN
     end
 
     def cents
-      price_container = @raw.ItemAttributes!.ListPrice || @raw.OfferSummary!.LowestUsedPrice
+      price_container = @raw.ItemAttributes!.ListPrice ||
+                        @raw.OfferSummary!.LowestUsedPrice ||
+                        @raw.OfferSummary!.LowestNewPrice
       if price_container and amount = price_container.Amount
         amount.to_i
       end
